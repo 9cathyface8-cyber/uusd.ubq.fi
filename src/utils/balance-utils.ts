@@ -11,7 +11,11 @@ export const MIN_DISPLAY_USD_VALUE = 1;
 
 function formatBalanceForInput(tokenBalance: TokenBalance): string {
   const formattedBalance = formatUnits(tokenBalance.balance, tokenBalance.decimals);
-  return formattedBalance.replace(/\.?0+$/, "") || "0";
+  if (!formattedBalance.includes(".")) {
+    return formattedBalance;
+  }
+
+  return formattedBalance.replace(/(\.\d*?[1-9])0+$/, "$1").replace(/\.0+$/, "") || "0";
 }
 
 /**

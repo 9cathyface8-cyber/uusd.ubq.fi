@@ -197,6 +197,16 @@ export class SimplifiedExchangeComponent {
       selectEl.value = selectedValue;
     } else if (selectEl.options.length > 0) {
       selectEl.selectedIndex = 0;
+
+      if (selectedValue) {
+        const amountInput = document.getElementById("exchangeAmount") as HTMLInputElement | null;
+        if (amountInput) {
+          amountInput.value = "";
+        }
+        this._state.amount = "";
+        this._state.routeResult = null;
+        this._services.notificationManager.clearNotifications("exchange");
+      }
     }
   }
 
